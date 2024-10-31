@@ -5,6 +5,12 @@
 	import type { AuthStore } from '$lib/stores/auth-store.svelte';
 	import DashboardSidebar from './dashboard/components/DashboardSidebar.svelte';
 
+	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+
+	import { useSidebar } from '$lib/components/ui/sidebar';
+
+	const sidebar = useSidebar();
+
 	const authStore = useStore<AuthStore>(AUTH_KEY);
 
 	let { children } = $props();
