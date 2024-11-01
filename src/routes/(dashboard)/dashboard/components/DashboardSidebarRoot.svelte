@@ -6,6 +6,6 @@
     let { children }: any = $props();
 </script>
 
-<Sidebar.Root collapsible="offcanvas">
+<Sidebar.Root collapsible="offcanvas" class="dark:border-transparent">
     {@render children?.()}
 </Sidebar.Root>

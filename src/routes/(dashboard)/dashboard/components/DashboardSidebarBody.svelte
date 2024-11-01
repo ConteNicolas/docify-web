@@ -1,82 +1,85 @@
-
 <script lang="ts">
-    import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import House from 'lucide-svelte/icons/house';
-    import Cubes from 'lucide-svelte/icons/boxes';
-    import Stores from 'lucide-svelte/icons/store';
-    import Users from 'lucide-svelte/icons/users';
-    import ChartColumn from 'lucide-svelte/icons/chart-column';
-    import FingerPrint from 'lucide-svelte/icons/fingerprint';
-    import CircleHelp from 'lucide-svelte/icons/circle-help';
-    import Network from 'lucide-svelte/icons/network';
-    import Microchip from 'lucide-svelte/icons/microchip';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import {
+		House,
+		Boxes,
+		Store,
+		Users,
+		ChartColumn,
+		Fingerprint,
+		CircleHelp,
+		Network,
+		Microchip
+	} from 'lucide-svelte';
 
-    const items = [
-        {
-            title: 'Home',
-            url: '#',
-            icon: House
-        },
-        {
-            title: 'Marketplace',
-            url: '#',
-            icon: Stores
-        },
-        {
-            title: 'Applications',
-            url: '#',
-            icon: Cubes
-        },
-        {
-            title: 'Organizations',
-            url: '#',
-            icon: Users
-        },
-        {
-            title: 'Metrics',
-            url: '#',
-            icon: ChartColumn
-        },
-        {
-            title: 'Security',
-            url: '#',
-            icon: FingerPrint
-        },
-        {
-            title: 'Integrations',
-            url: '#',
-            icon: Microchip
-        },
-        {
-            title: "Webhooks",
-            url: "#",
-            icon: Network
-        },
-        {
-            title: 'Help',
-            url: '#',
-            icon: CircleHelp
-        }
-    ];
+	const items = [
+		{
+			title: 'Home',
+			url: '#',
+			icon: House
+		},
+		{
+			title: 'Marketplace',
+			url: '#',
+			icon: Store
+		},
+		{
+			title: 'Applications',
+			url: '#',
+			icon: Boxes
+		},
+		{
+			title: 'Organizations',
+			url: '#',
+			icon: Users
+		},
+		{
+			title: 'Metrics',
+			url: '#',
+			icon: ChartColumn
+		},
+		{
+			title: 'Security',
+			url: '#',
+			icon: Fingerprint
+		},
+		{
+			title: 'Integrations',
+			url: '#',
+			icon: Microchip
+		},
+		{
+			title: 'Webhooks',
+			url: '#',
+			icon: Network
+		},
+		{
+			title: 'Help',
+			url: '#',
+			icon: CircleHelp
+		}
+	];
 </script>
 
 <Sidebar.Content class="mt-5">
-    <Sidebar.Group>
-        <Sidebar.GroupContent>
-            <Sidebar.Menu>
-                {#each items as item}
-                    <Sidebar.MenuItem>
-                        <Sidebar.MenuButton class="font-medium text-base hover:bg-orange-400 hover:text-white h-10">  
-                            {#snippet child({ props })}
-                                <a href={item.url} {...props}>
-                                    <item.icon class="sidebar-icon-size ml-3" />
-                                    <span class="ml-2 text-md">{item.title}</span>
-                                </a>
-                            {/snippet}
-                        </Sidebar.MenuButton>
-                    </Sidebar.MenuItem>
-                {/each}
-            </Sidebar.Menu>
-        </Sidebar.GroupContent>
-    </Sidebar.Group>
+	<Sidebar.Group>
+		<Sidebar.GroupContent>
+			<Sidebar.Menu>
+				{#each items as item}
+					<Sidebar.MenuItem>
+						<Sidebar.MenuButton
+							class="h-10 font-medium hover:bg-orange-500 hover:text-white"
+						>
+							{#snippet child({ props })}
+								<a href={item.url} {...props}>
+									<item.icon class="ml-3" style="width: 25px; height: 25px;" />
+									<span class="text-base ml-3">{item.title}</span>
+								</a>
+							{/snippet}
+						</Sidebar.MenuButton>
+					</Sidebar.MenuItem>
+				{/each}
+			</Sidebar.Menu>
+		</Sidebar.GroupContent>
+	</Sidebar.Group>
 </Sidebar.Content>

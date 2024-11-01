@@ -1,15 +1,11 @@
 <script lang="ts">
-	import { SidebarProvider, SidebarTrigger } from '$lib/components/ui/sidebar';
+	import { SidebarProvider } from '$lib/components/ui/sidebar';
 	import { useStore } from '$lib/hooks/useStore';
 	import { AUTH_KEY } from '$lib/store-keys';
 	import type { AuthStore } from '$lib/stores/auth-store.svelte';
+	
+	import DashboardNavbar from './dashboard/components/DashboardNavbar.svelte';
 	import DashboardSidebar from './dashboard/components/DashboardSidebar.svelte';
-
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
-
-	import { useSidebar } from '$lib/components/ui/sidebar';
-
-	const sidebar = useSidebar();
 
 	const authStore = useStore<AuthStore>(AUTH_KEY);
 
@@ -26,8 +22,12 @@
 
 <SidebarProvider>
 	<DashboardSidebar />
-	<main>
-		<SidebarTrigger class="hover:bg-orange-400 size-12 hover:text-white mt-3 ml-3" />
-		{@render children?.()}
+	<main class="w-full h-screen flex flex-col">
+		<div class="w-full" style="height: 7%;">
+			<DashboardNavbar />
+		</div>
+		<div class="w-full p-6" style="height: 93%;">
+			{@render children?.()}
+		</div>
 	</main>
 </SidebarProvider>

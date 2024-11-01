@@ -1,15 +1,20 @@
 <script lang="ts">
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
 
 	import Settings from 'lucide-svelte/icons/settings';
 	import SignOut from 'lucide-svelte/icons/log-out';
 	import { useStore } from '$lib/hooks/useStore';
 	import { AUTH_KEY } from '$lib/store-keys';
 	import type { AuthStore } from '$lib/stores/auth-store.svelte';
+	import { goto } from '$app/navigation';
 
 	const authStore = useStore<AuthStore>(AUTH_KEY);
 
+	const handleSignOut = async () => {
+		await authStore.signOut(async () => await goto('/sign-in'));
+	};
 </script>
 
 <Sidebar.Footer class="h-20">
@@ -18,14 +23,13 @@
 			{#snippet child({ props })}
 				<Sidebar.MenuButton
 					{...props}
-					class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground h-full"
+					class="h-full data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
 				>
 					<div class="flex w-full flex-row items-center justify-start">
-						<div
-							class="ml-2 flex size-8 items-center justify-center rounded-full bg-orange-600 text-white"
-						>
-							CA
-						</div>
+						<Avatar.Root class="ml-3">
+							<Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+							<Avatar.Fallback>CN</Avatar.Fallback>
+						</Avatar.Root>
 						<div class="ml-3 flex w-1/2 flex-col items-start justify-center">
 							<span class="text-md font-bold">Usuario</span>
 							<span class="text-sm font-light">admin@admin.com</span>
@@ -35,11 +39,11 @@
 			{/snippet}
 		</DropdownMenu.Trigger>
 		<DropdownMenu.Content side="top" class="mb-3 w-[--bits-dropdown-menu-anchor-width]">
-			<DropdownMenu.Item class="hover:bg-orange-400 hover:text-white">
+			<DropdownMenu.Item class="hover:bg-orange-500 hover:text-white">
 				<Settings />
 				<span>Settings</span>
 			</DropdownMenu.Item>
-			<DropdownMenu.Item onclick={() => authStore.signOut()}>
+			<DropdownMenu.Item onclick={handleSignOut}>
 				<SignOut />
 				<span>Logout</span>
 			</DropdownMenu.Item>
