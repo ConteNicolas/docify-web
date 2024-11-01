@@ -1,1 +1,4 @@
-<h1>Eu soy aplicacion</h1>
+
+<div class="w-full h-full bg-cyan-500">
+
+</div>

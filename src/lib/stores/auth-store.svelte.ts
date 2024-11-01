@@ -3,15 +3,12 @@ import type { ApiErrorResponse } from "$lib/models/api-error-response";
 import type { ISignInRequest, ISignUpRequest } from "$lib/models/authentication";
 import authenticationService from "$lib/services/auth-service";
 import { isApiErrorResponse } from "$lib/utils";
-import { onMount } from "svelte";
 
 export class AuthStore {
     public isAuthenticated: boolean = $state(false);
 
     constructor() {
-        onMount(() => {
-            this.isAuthenticated = browser && localStorage.getItem("token") !== null;
-        });
+        this.isAuthenticated = browser && localStorage.getItem("token") !== null;
     }
 
     public async signIn(request: ISignInRequest): Promise<string | ApiErrorResponse> {
