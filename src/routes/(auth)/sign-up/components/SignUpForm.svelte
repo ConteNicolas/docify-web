@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import FormErrorDisplayer from '$lib/components/FormErrorDisplayer.svelte';
+	import FormErrorDisplayer from '$lib/components/common/FormErrorDisplayer.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Input } from '$lib/components/ui/input';

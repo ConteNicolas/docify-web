@@ -3,7 +3,7 @@
 
 	import { Toaster } from 'svelte-sonner';
 	import { registerAllStores } from '$lib/store-register';
-	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
+	import LoadingSpinner from '$lib/components/common/LoadingSpinner.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 
 	let { children } = $props();
