@@ -41,9 +41,11 @@ export class AuthStore {
         return response as string;
     }
 
-    public async signOut(): Promise<void> {
+    public async signOut(onSignout: () => Promise<void>): Promise<void> {
         localStorage.removeItem("token");
         this.isAuthenticated = false;
+
+        await onSignout();
     }
 }
 
