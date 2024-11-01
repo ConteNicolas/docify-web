@@ -7,13 +7,15 @@
 	import Label from '$lib/components/ui/label/label.svelte';
 	import { useForm } from '$lib/hooks/useForm.svelte';
 	import { useStore } from '$lib/hooks/useStore';
-	import { AUTH_KEY } from '$lib/store-keys';
+	import { AUTH_KEY, LOADING_SPINNER_KEY } from '$lib/store-keys';
 	import { AuthStore } from '$lib/stores/auth-store.svelte';
+	import type { LoadingSpinnerStore } from '$lib/stores/loading-spinner-store.svelte';
 	import { isApiErrorResponse } from '$lib/utils';
 	import { toast } from 'svelte-sonner';
 	import { z } from 'zod';
 
 	const authStore = useStore<AuthStore>(AUTH_KEY);
+	const loadingSpinnerStore = useStore<LoadingSpinnerStore>(LOADING_SPINNER_KEY);
 
 	export const signInFormSchema = z.object({
 		email: z.string().email({ message: 'Invalid email address' }),
@@ -26,14 +28,19 @@
 	});
 
 	const onSubmit = async (data: any) => {
+		loadingSpinnerStore.setLoading(true);
 		const response = await authStore.signIn(data)
 
 		if (isApiErrorResponse(response)) {
 			toast.error(response.message);
+			loadingSpinnerStore.setLoading(false);
 			return;
 		}
 
+		
 		toast.success('Successfully signed in');
+	
+		loadingSpinnerStore.setLoading(false);
 
 		goto("/dashboard");
 	};

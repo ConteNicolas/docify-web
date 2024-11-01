@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { Toaster } from 'svelte-sonner';
 	import '../app.css';
+
+	import { Toaster } from 'svelte-sonner';
 	import { registerAllStores } from '$lib/store-register';
+	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 
 	let { children } = $props();
@@ -9,7 +11,8 @@
 	registerAllStores();
 </script>
 
-<Toaster />
 <ModeWatcher />
+<Toaster />
+<LoadingSpinner />
 
 {@render children()}

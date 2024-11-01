@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import FormErrorDisplayer from '$lib/components/FormErrorDisplayer.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { Checkbox } from '$lib/components/ui/checkbox';
@@ -6,13 +7,15 @@
 	import Label from '$lib/components/ui/label/label.svelte';
 	import { useForm } from '$lib/hooks/useForm.svelte';
 	import { useStore } from '$lib/hooks/useStore';
-	import { AUTH_KEY } from '$lib/store-keys';
+	import { AUTH_KEY, LOADING_SPINNER_KEY } from '$lib/store-keys';
 	import { AuthStore } from '$lib/stores/auth-store.svelte';
+	import type { LoadingSpinnerStore } from '$lib/stores/loading-spinner-store.svelte';
 	import { isApiErrorResponse } from '$lib/utils';
 	import { toast } from 'svelte-sonner';
 	import { z } from 'zod';
 
 	const authStore = useStore<AuthStore>(AUTH_KEY);
+	const loadingSpinnerStore = useStore<LoadingSpinnerStore>(LOADING_SPINNER_KEY);
 
 	export const signUpFormSchema = z.object({
 		firstName: z.string().min(2, { message: 'First name must be at least 2 characters long' }),
@@ -37,14 +40,20 @@
 	});
 
 	const onSubmit = async (data: any) => {
+		loadingSpinnerStore.setLoading(true);
 		const response = await authStore.signUp(data);
 
 		if (isApiErrorResponse(response)) {
+			loadingSpinnerStore.setLoading(false);
 			toast.error(response.message);
 			return;
 		}
 
+		loadingSpinnerStore.setLoading(false);
+
 		toast.success('Successfully signed up');
+
+		await goto('/sign-in');
 	};
 </script>
 
