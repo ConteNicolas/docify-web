@@ -15,7 +15,7 @@
 	const items = [
 		{
 			title: 'Home',
-			url: '#',
+			url: '/dashboard',
 			icon: House
 		},
 		{
@@ -25,7 +25,7 @@
 		},
 		{
 			title: 'Applications',
-			url: '#',
+			url: '/dashboard/applications',
 			icon: Boxes
 		},
 		{
