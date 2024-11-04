@@ -2,6 +2,7 @@ import type { ApiErrorResponse } from "$lib/models/api-error-response";
 import type { ISignInRequest, ISignUpRequest } from "$lib/models/authentication";
 import type { AxiosError, AxiosResponse } from "axios";
 import { ServiceBase } from "./service-base";
+import type { IGetMeResponse } from "$lib/models/user";
 
 export class AuthenticationService extends ServiceBase {
     constructor() {

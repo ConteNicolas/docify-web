@@ -9,3 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export const isApiErrorResponse = (data: unknown): data is ApiErrorResponse => {
     return typeof data === 'object' && data !== null && 'code' in (data as ApiErrorResponse) && 'message' in (data as ApiErrorResponse);
 }
+
+export function convertObjectToQueryString(obj: any) {
+    return Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
+}

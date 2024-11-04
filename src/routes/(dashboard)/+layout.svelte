@@ -18,6 +18,8 @@
 
 		if (!authStore?.isAuthenticated) {
 			await goto('/sign-in');
+		} else {
+			authStore.setCurrentUser();
 		}
 	});
 </script>

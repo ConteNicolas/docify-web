@@ -31,8 +31,12 @@
 							<Avatar.Fallback>CN</Avatar.Fallback>
 						</Avatar.Root>
 						<div class="ml-3 flex w-1/2 flex-col items-start justify-center">
-							<span class="text-md font-bold">Usuario</span>
-							<span class="text-sm font-light">admin@admin.com</span>
+							<span class="text-md font-bold">{authStore?.currentUser?.firstName}</span>
+							<span class="truncate text-sm font-light"
+								>{authStore?.currentUser?.email && authStore?.currentUser?.email?.length > 20
+									? authStore?.currentUser?.email.substring(0, 19)
+									: authStore?.currentUser?.email}</span
+							>
 						</div>
 					</div>
 				</Sidebar.MenuButton>

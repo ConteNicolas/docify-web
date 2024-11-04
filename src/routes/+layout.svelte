@@ -5,7 +5,7 @@
 	import { registerAllStores } from '$lib/store-register';
 	import LoadingSpinner from '$lib/components/common/LoadingSpinner.svelte';
 	import { ModeWatcher } from 'mode-watcher';
-
+	
 	let { children } = $props();
 
 	registerAllStores();

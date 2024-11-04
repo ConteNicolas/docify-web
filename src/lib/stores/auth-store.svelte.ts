@@ -1,11 +1,14 @@
 import { browser } from "$app/environment";
 import type { ApiErrorResponse } from "$lib/models/api-error-response";
 import type { ISignInRequest, ISignUpRequest } from "$lib/models/authentication";
+import type { ICurrentUser } from "$lib/models/user";
 import authenticationService from "$lib/services/auth-service";
+import userService from "$lib/services/user-service";
 import { isApiErrorResponse } from "$lib/utils";
 
 export class AuthStore {
     public isAuthenticated: boolean = $state(false);
+    public currentUser: ICurrentUser | null = $state(null);
 
     constructor() {
         this.isAuthenticated = browser && localStorage.getItem("token") !== null;
@@ -43,6 +46,22 @@ export class AuthStore {
         this.isAuthenticated = false;
 
         await onSignout();
+    }
+
+    public async setCurrentUser() {
+        if (this?.isAuthenticated && this.currentUser) {
+            return;
+        }
+
+        const response = await userService.getMe();
+
+        if (isApiErrorResponse(response)) {
+            return response as ApiErrorResponse;
+        }
+
+        this.currentUser = response;
+
+        console.log("Current user 👤 ", this.currentUser);
     }
 }
 
