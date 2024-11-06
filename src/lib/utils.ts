@@ -13,3 +13,11 @@ export const isApiErrorResponse = (data: unknown): data is ApiErrorResponse => {
 export function convertObjectToQueryString(obj: any) {
     return Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
 }
+
+export function getAvatarName(firstName: string | undefined, lastName: string | undefined) {
+    if (!firstName || !lastName) {
+        return 'N/A';
+    }
+
+    return firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
+}

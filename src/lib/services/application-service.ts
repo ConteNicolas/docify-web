@@ -1,4 +1,4 @@
-import type { IGetAllApplicationsByOwnerRequest, IGetAllApplicationsByOwnerResponse } from "$lib/models/applications";
+import type { ICreateApplicationRequest, IGetAllApplicationsByOwnerRequest, IGetAllApplicationsByOwnerResponse } from "$lib/models/applications";
 import type { IPaginationList } from "$lib/models/pagination";
 import type { AxiosError, AxiosResponse } from "axios";
 import { ServiceBase } from "./service-base";
@@ -16,6 +16,17 @@ export class ApplicationService extends ServiceBase {
         try {
             const queryString = convertObjectToQueryString(request);
             const response: AxiosResponse = await this.api.get('applications/owns' + '?' + queryString);
+            return response?.data;
+        } catch (err: unknown) {
+            const error = (err as AxiosError).response?.data || { code: 'UNKNOWN_ERROR', message: 'Unknown error occurred' };
+            console.log("Error auth service, ", error);
+            return error as ApiErrorResponse;
+        }
+    }
+
+    async createApplication(request: ICreateApplicationRequest) : Promise<string | ApiErrorResponse> { 
+        try {
+            const response: AxiosResponse = await this.api.post('applications', request);
             return response?.data;
         } catch (err: unknown) {
             const error = (err as AxiosError).response?.data || { code: 'UNKNOWN_ERROR', message: 'Unknown error occurred' };

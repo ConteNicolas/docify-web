@@ -7,9 +7,10 @@ import Input from '../ui/input/input.svelte';
 	type ChipInputProps = {
 		chips: string[];
 		placeholder?: string | undefined;
+		disabled?: boolean;
 	};
 
-	let { chips = $bindable([]), placeholder }: ChipInputProps = $props();
+	let { chips = $bindable([]), placeholder, disabled }: ChipInputProps = $props();
 
 	let inputValue = $state('');
 
@@ -32,6 +33,7 @@ import Input from '../ui/input/input.svelte';
 		placeholder={placeholder}
 		onkeydown={(e) => e.key === 'Enter' && addChip()}
 		class="w-10/12 mb-3 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+		disabled={disabled}
 	/>
 	<Button variant="ghost" size="icon" class="w-1/6 hover:bg-transparent hover:text-orange-500" onclick={addChip}>
 		<PlusCircle style="width: 22px; height: 22px;" />

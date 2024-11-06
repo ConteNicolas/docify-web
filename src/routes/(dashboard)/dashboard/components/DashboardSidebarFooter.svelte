@@ -9,6 +9,7 @@
 	import { AUTH_KEY } from '$lib/store-keys';
 	import type { AuthStore } from '$lib/stores/auth-store.svelte';
 	import { goto } from '$app/navigation';
+	import { getAvatarName } from '$lib/utils';
 
 	const authStore = useStore<AuthStore>(AUTH_KEY);
 
@@ -28,7 +29,7 @@
 					<div class="flex w-full flex-row items-center justify-start">
 						<Avatar.Root class="ml-3">
 							<Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
-							<Avatar.Fallback>CN</Avatar.Fallback>
+							<Avatar.Fallback>{getAvatarName(authStore?.currentUser?.firstName, authStore?.currentUser?.lastName)}</Avatar.Fallback>
 						</Avatar.Root>
 						<div class="ml-3 flex w-1/2 flex-col items-start justify-center">
 							<span class="text-md font-bold">{authStore?.currentUser?.firstName}</span>

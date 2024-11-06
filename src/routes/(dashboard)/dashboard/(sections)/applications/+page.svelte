@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Tabs from '$lib/components/ui/tabs/index.js';
-	import OrganizationApplicationsTable from './components/OrganizationApplicationsTable.svelte';
-	import PersonalApplicationsTable from './components/PersonalApplicationsTable.svelte';
+	import OrganizationApplicationsTable from './components/organization/OrganizationApplicationsTable.svelte';
+	import PersonalAppTab from './components/personal/PersonalAppTab.svelte';
 </script>
 
 <div
@@ -16,7 +16,7 @@
 		</div>
 		<div class="w-full" style="height: 94%;">
 			<Tabs.Content class="w-full h-full" value="personal">
-				<PersonalApplicationsTable />
+				<PersonalAppTab />
 			</Tabs.Content>
 			<Tabs.Content class="w-full h-full" value="organization">
 				<OrganizationApplicationsTable />

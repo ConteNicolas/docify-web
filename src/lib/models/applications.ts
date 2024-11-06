@@ -1,5 +1,8 @@
 
-
+export enum ApplicationType {
+    Personal = 1,
+    Organization = 2
+}
 
 export enum ApplicationAccessLevel {
     Public = 1,
@@ -14,10 +17,10 @@ export const ApplicationAccessLevelList: Array<{ value: ApplicationAccessLevel, 
 export interface IGetAllApplicationsByOwnerResponse {
     id: string;
     name: string;
-    description: string;
-    tag: string[];
     accessLevel: ApplicationAccessLevel;
     accessLevelDescription: string;
+    type: ApplicationType;
+    lastPublicationDate: string | undefined;
 }
 
 export interface IGetAllApplicationsByOwnerRequest {
@@ -29,3 +32,12 @@ export interface IGetAllApplicationsByOwnerRequest {
 }
 
 
+export interface ICreateApplicationRequest {
+    name: string;
+    description: string;
+    userId: string;
+    accessLevel: ApplicationAccessLevel
+    tags: string[];
+    applicationType: ApplicationType
+    organizationId?: string;
+}
